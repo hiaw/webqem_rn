@@ -18,4 +18,7 @@ export default {
     width: 350,
     height: 350,
   },
+  loading: {
+    height: 350
+  }
 }
