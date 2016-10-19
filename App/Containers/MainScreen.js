@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import { Button, FormLabel, FormInput} from 'react-native-elements'
 import Chart from 'react-native-chart'
+import randomColor from 'randomcolor'
 
 import styles from './Styles/MainScreen.Style.js'
 
@@ -14,6 +15,7 @@ export default class MainScreen extends Component {
     this.state = {
       type:'uint8',
       data: [],
+      colors: [],
       numOfRandomNum: '5'
     }
     this.changeNumberType = this.changeNumberType.bind(this)
@@ -31,10 +33,12 @@ export default class MainScreen extends Component {
       .then((response) => response.json())
       .then((responseJson) => {
         let newData = []
+        let colors = []
         for (let i = 0; i < responseJson.data.length; i++) {
           newData.push([i, responseJson.data[i]])
+          colors.push(randomColor().toString())
         }
-        this.setState({data: newData})
+        this.setState({data: newData, colors: colors})
       })
       .done()
   }
@@ -75,6 +79,7 @@ export default class MainScreen extends Component {
           title='Request' />
         <Chart
           style={styles.chart}
+      color='#ddd'
           data={this.state.data}
           type="bar"
         />
