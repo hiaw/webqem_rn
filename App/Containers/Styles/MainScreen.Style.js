@@ -1,18 +1,16 @@
 export default {
   container: {
+    marginTop: 40
+  },
+  row: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    flexDirection: 'row',
+    marginBottom: 2
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  textRow: {
+    flex: 3
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  fullRow: {
+    flex: 1
+  }
 }
