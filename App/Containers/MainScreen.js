@@ -69,7 +69,7 @@ export default class MainScreen extends Component {
     if (this.state.loading) {
       chart = <ActivityIndicator
       animating={true}
-      style={[styles.centering, {height: 350}]}
+      style={styles.loading}
       size="large"/>
     }
     return (
