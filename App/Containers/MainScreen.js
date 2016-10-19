@@ -30,7 +30,14 @@ export default class MainScreen extends Component {
   }
 
   getMoreRandomNumber() {
-
+    fetch('https://facebook.github.io/react-native/movies.json')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log(responseJson.movies);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   changeNumberType() {
