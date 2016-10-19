@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  ActivityIndicator,
   ScrollView,
   Text,
   View
@@ -15,6 +16,7 @@ export default class MainScreen extends Component {
     this.state = {
       type:'uint8',
       data: [],
+      loading: false,
       numOfRandomNum: '5'
     }
     this.changeNumberType = this.changeNumberType.bind(this)
@@ -28,6 +30,7 @@ export default class MainScreen extends Component {
   }
 
   getMoreRandomNumber() {
+    this.setState({loading: true})
     fetch(`https://qrng.anu.edu.au/API/jsonI.php?length=${this.state.numOfRandomNum}&type=${this.state.type}`)
       .then((response) => response.json())
       .then((responseJson) => {
@@ -35,7 +38,7 @@ export default class MainScreen extends Component {
         for (let i = 0; i < responseJson.data.length; i++) {
           newData.push([i+1, responseJson.data[i]])
         }
-        this.setState({data: newData})
+        this.setState({data: newData, loading: false})
       })
       .done()
   }
@@ -58,6 +61,17 @@ export default class MainScreen extends Component {
 
   render() {
     let valueTable = this.state.data.map(this.renderValueList)
+    let chart = <Chart
+          style={styles.chart}
+          data={this.state.data}
+          type="bar"
+        />
+    if (this.state.loading) {
+      chart = <ActivityIndicator
+      animating={true}
+      style={[styles.centering, {height: 350}]}
+      size="large"/>
+    }
     return (
       <ScrollView style={styles.container}>
         <View style={styles.row}>
@@ -79,11 +93,7 @@ export default class MainScreen extends Component {
           small
           onPress={this.getMoreRandomNumber}
           title='Request' />
-        <Chart
-          style={styles.chart}
-          data={this.state.data}
-          type="bar"
-        />
+      {chart}
       {valueTable}
       </ScrollView>
     );
