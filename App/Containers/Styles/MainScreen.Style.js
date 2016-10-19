@@ -12,5 +12,10 @@ export default {
   },
   fullRow: {
     flex: 1
-  }
+  },
+  chart: {
+    marginTop: 15,
+    width: 350,
+    height: 350,
+  },
 }

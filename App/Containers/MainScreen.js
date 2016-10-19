@@ -4,14 +4,24 @@ import {
   View
 } from 'react-native';
 import { Button, FormLabel, FormInput} from 'react-native-elements'
+import Chart from 'react-native-chart'
+
 
 import styles from './Styles/MainScreen.Style.js'
+
+const data = [
+    [0, 1],
+    [1, 3],
+    [3, 7],
+    [4, 9],
+];
 
 export default class MainScreen extends Component {
   constructor(props){
     super(props)
     this.state = {
       type:'uint8',
+      data: data,
       numOfRandomNum: 10
     }
     this.changeNumberType = this.changeNumberType.bind(this)
@@ -57,6 +67,13 @@ export default class MainScreen extends Component {
           small
           onPress={this.getMoreRandomNumber}
           title='Request' />
+        <Chart
+          style={styles.chart}
+          data={this.state.data}
+          verticalGridStep={5}
+          type="line"
+          showDataPoint={true}
+        />
       </View>
     );
   }
