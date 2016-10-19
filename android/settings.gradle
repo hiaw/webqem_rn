@@ -1,0 +1,3 @@
+rootProject.name = 'WebQem_RN'
+
+include ':app'
