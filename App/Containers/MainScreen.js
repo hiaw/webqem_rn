@@ -3,7 +3,7 @@ import {
   Text,
   View
 } from 'react-native';
-import { Button, FormLabel, FormInput} from 'react-native-elements'
+import { Button, ListItem, FormLabel, FormInput} from 'react-native-elements'
 import Chart from 'react-native-chart'
 
 import styles from './Styles/MainScreen.Style.js'
@@ -32,7 +32,7 @@ export default class MainScreen extends Component {
       .then((responseJson) => {
         let newData = []
         for (let i = 0; i < responseJson.data.length; i++) {
-          newData.push([i, responseJson.data[i]])
+          newData.push([i+1, responseJson.data[i]])
         }
         this.setState({data: newData})
       })
@@ -51,7 +51,12 @@ export default class MainScreen extends Component {
     this.setState({numOfRandomNum: value})
   }
 
+  renderValueList(value) {
+    return <ListItem key={value[0]} title={`#${value[0]}: ${value[1]}`}/>
+  }
+
   render() {
+    let valueTable = this.state.data.map(this.renderValueList)
     return (
       <View style={styles.container}>
         <View style={styles.row}>
@@ -79,6 +84,7 @@ export default class MainScreen extends Component {
           type="bar"
         />
       </View>
+      {valueTable}
     );
   }
 }
