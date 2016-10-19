@@ -22,22 +22,29 @@ export default class MainScreen extends Component {
     this.state = {
       type:'uint8',
       data: data,
-      numOfRandomNum: 10
+      numOfRandomNum: '5'
     }
     this.changeNumberType = this.changeNumberType.bind(this)
     this.getMoreRandomNumber = this.getMoreRandomNumber.bind(this)
     this.changeNumberOfRandomNumber = this.changeNumberOfRandomNumber.bind(this)
   }
 
+
+ componentDidMount() {
+    this.getMoreRandomNumber()
+  }
+
   getMoreRandomNumber() {
-    fetch('https://facebook.github.io/react-native/movies.json')
+    fetch(`https://qrng.anu.edu.au/API/jsonI.php?length=${this.state.numOfRandomNum}&type=${this.state.type}`)
       .then((response) => response.json())
       .then((responseJson) => {
-        console.log(responseJson.movies);
+        let newData=[]
+        for (let i = 0; i < responseJson.data.length; i++) {
+          newData.push([i, responseJson.data[i]])
+        }
+        this.setState({data: newData})
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .done()
   }
 
   changeNumberType() {
@@ -60,7 +67,7 @@ export default class MainScreen extends Component {
             <FormInput
               placeholder='Num of Random Numbers'
               keyboardType='numeric'
-              value={this.state.numOfRandomNum.toString()}
+              value={this.state.numOfRandomNum}
               onChangeText={this.changeNumberOfRandomNumber}/>
           </View>
           <View style={styles.fullRow}>
@@ -78,7 +85,7 @@ export default class MainScreen extends Component {
           style={styles.chart}
           data={this.state.data}
           verticalGridStep={5}
-          type="line"
+          type="bar"
           showDataPoint={true}
         />
       </View>
