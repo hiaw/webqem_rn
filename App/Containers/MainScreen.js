@@ -6,22 +6,14 @@ import {
 import { Button, FormLabel, FormInput} from 'react-native-elements'
 import Chart from 'react-native-chart'
 
-
 import styles from './Styles/MainScreen.Style.js'
-
-const data = [
-    [0, 1],
-    [1, 3],
-    [3, 7],
-    [4, 9],
-];
 
 export default class MainScreen extends Component {
   constructor(props){
     super(props)
     this.state = {
       type:'uint8',
-      data: data,
+      data: [],
       numOfRandomNum: '5'
     }
     this.changeNumberType = this.changeNumberType.bind(this)
@@ -38,7 +30,7 @@ export default class MainScreen extends Component {
     fetch(`https://qrng.anu.edu.au/API/jsonI.php?length=${this.state.numOfRandomNum}&type=${this.state.type}`)
       .then((response) => response.json())
       .then((responseJson) => {
-        let newData=[]
+        let newData = []
         for (let i = 0; i < responseJson.data.length; i++) {
           newData.push([i, responseJson.data[i]])
         }
@@ -84,9 +76,7 @@ export default class MainScreen extends Component {
         <Chart
           style={styles.chart}
           data={this.state.data}
-          verticalGridStep={5}
           type="bar"
-          showDataPoint={true}
         />
       </View>
     );
