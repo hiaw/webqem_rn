@@ -19,5 +19,12 @@ To run your app on Android:
    cd WebQem_RN
    react-native run-android
 
+
 Project Time Estimate:
     1 1/2 hour.
+
+
+Project Note:
+Actual time: 1 hour 50 minutes.
+- Encountered [iOS App Transport Security Issue](https://facebook.github.io/react-native/releases/0.28/docs/known-issues.html#ios-app-transport-security-and-loading-http-resources), that's why it took much longer to complete project.
+- react-native-chart does not allow to different color for each bar of the bar chart, may be able to another library if different color is a fixed requirement.
