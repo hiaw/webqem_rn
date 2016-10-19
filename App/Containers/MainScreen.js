@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  ScrollView,
   Text,
   View
 } from 'react-native';
@@ -58,7 +59,7 @@ export default class MainScreen extends Component {
   render() {
     let valueTable = this.state.data.map(this.renderValueList)
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <View style={styles.row}>
           <View style={styles.textRow}>
             <FormInput
@@ -83,8 +84,8 @@ export default class MainScreen extends Component {
           data={this.state.data}
           type="bar"
         />
-      </View>
       {valueTable}
+      </ScrollView>
     );
   }
 }
